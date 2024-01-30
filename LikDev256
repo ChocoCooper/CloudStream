@@ -1,0 +1,8 @@
+{
+    "name": "LikDev-256 providers repository",
+    "description": "Cloudstream extension Repository",
+    "manifestVersion": 1,
+    "pluginLists": [
+      "https://raw.githubusercontent.com/LikDev-256/likdev256-tamil-providers/builds/plugins.json"
+    ]
+}
