@@ -11,7 +11,7 @@
 + Chromecast
 + Extension system for personal customization
 
-## Click to get repo
+## *click to get repo*
 + [English](https://raw.githubusercontent.com/Private-Detective/CloudStream/refs/heads/main/English.json)
 + [Hexated](https://raw.githubusercontent.com/Private-Detective/CloudStream/refs/heads/main/Hexated.json)
 + [LikDev256](https://raw.githubusercontent.com/Private-Detective/CloudStream/refs/heads/main/LikDev256.json)
