@@ -12,9 +12,9 @@
 + Extension system for personal customization
 
 ## Click to get repo
-+ [English](cloudstreamrepo://raw.githubusercontent.com/Private-Detective/CloudStream/refs/heads/main/English.json)
-+ [Hexated](cloudstreamrepo://raw.githubusercontent.com/Private-Detective/CloudStream/refs/heads/main/Hexated.json)
-+ [LikDev256](cloudstreamrepo://raw.githubusercontent.com/Private-Detective/CloudStream/refs/heads/main/LikDev256.json)
++ [English](https://raw.githubusercontent.com/Private-Detective/CloudStream/refs/heads/main/English.json)
++ [Hexated](https://raw.githubusercontent.com/Private-Detective/CloudStream/refs/heads/main/Hexated.json)
++ [LikDev256](https://raw.githubusercontent.com/Private-Detective/CloudStream/refs/heads/main/LikDev256.json)
 
 ## cs-repos
 Community Cloudstream repositories
