@@ -3,6 +3,8 @@
 
 ![img](https://static.miraheze.org/cloudstreamwiki/a/a1/Stable_logo.svg)
 
+[**Download Link**](https://github.com/recloudstream/cloudstream/releases/latest)
+
 ### Features:
 + **AdFree**, No ads whatsoever
 + No tracking/analytics
