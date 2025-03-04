@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cooper's World</title>
+    <style>
+        body {
+            background-color: rgb(40, 40, 40);
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .searchBox {
+            display: flex;
+            width: 100%; /* Full width */
+            max-width: 600px; /* Maximum width for larger screens */
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: #2f3640;
+            border-radius: 50px;
+            position: relative;
+            height: 40px; /* Reduced height */
+        }
+
+        .searchButton {
+            color: white;
+            width: 40px; /* Adjusted width */
+            height: 40px; /* Adjusted height */
+            border-radius: 50%;
+            background: var(--gradient-2, linear-gradient(90deg, #2AF598 0%, #009EFD 100%));
+            border: 0;
+            display: inline-block;
+            transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        }
+
+        .searchButton:hover {
+            color: #fff;
+            background-color: #1A1A1A;
+            box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+            transform: translateY(-3px);
+        }
+
+        .searchButton:active {
+            box-shadow: none;
+            transform: translateY(0);
+        }
+
+        .searchInput {
+            border: none;
+            background: none;
+            outline: none;
+            color: white;
+            font-size: 15px;
+            padding: 8px 10px; /* Reduced padding for smaller height */
+            width: 100%; /* Make input take full width */
+            height: 100%; /* Ensure input takes full height of the search box */
+        }
+
+        .results {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .result-item {
+            margin: 10px;
+            cursor: pointer;
+            text-align: center;
+            flex: 1 1 200px;
+            max-width: 200px;
+        }
+
+        .result-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        iframe {
+            margin-top: 20px;
+            width: 80%;
+            height: 500px;
+            border: none;
+            display: none; /* Initially hidden */
+        }
+
+        /* Image Gallery Styles */
+        .container img {
+            width: 18%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            transition: all ease-in-out 0.5s;
+        }
+
+        .container img:hover {
+            width: 25%;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 600px) {
+            .searchBox {
+                max-width: 100%;
+            }
+            .result-item {
+                flex: 1 1 100%;
+                max-width: none;
+            }
+        }
+        @media (min-width: 601px) and (max-width: 900px) {
+            .result-item {
+                flex: 1 1 45%;
+            }
+        }
+        @media (min-width: 901px) {
+            .result-item {
+                flex: 1 1 30%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Cooper's World</h1>
+    <div class="searchBox">
+        <input class="searchInput" type="text" id="searchQuery" placeholder="Search for movies..." />
+        <button class="searchButton" id="searchButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+                <g clip-path="url(#clip0_2_17)">
+                    <g filter="url(#filter0_d_2_17)">
+                        <path d="M23.7953 23.9182L19.0585 19.1814M19.0585 19.1814C19.8188 18.4211 20.4219 17.5185 20.8333 16.5251C21.2448 15.5318 21.4566 14.4671 21.4566 13.3919C21.4566 12.3167 21.2448 11.252 20.8333 10.2587C20.4219 9.2653 19.8188 8.36271 19.0585 7.60242C18.2982 6.84214 17.3956 6.23905 16.4022 5.82759C15.4089 5.41612 14.3442 5.20435 13.269 5.20435C12.1938 5.20435 11.1291 5.41612 10.1358 5.82759C9.1424 6.23905 8.23981 6.84214 7.47953 7.60242C5.94407 9.13789 5.08145 11.2204 5.08145 13.3919C5.08145 15.5634 5.94407 17.6459 7.47953 19.1814C9.01499 20.7168 11.0975 21.5794 13.269 21.5794C15.4405 21.5794 17.523 20.7168 19.0585 19.1814Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" shape-rendering="crispEdges"></path>
+                    </g>
+                </g>
+                <defs>
+                    <filter id="filter0_d_2_17" x="-0.418549" y="3.70435" width="29.7139" height="29.7139" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+                        <feOffset dy="4"></feOffset>
+                        <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                        <feComposite in2="hardAlpha" operator="out"></feComposite>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_17"></feBlend>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_17" result="shape"></feBlend>
+                    </filter>
+                    <clipPath id="clip0_2_17">
+                        <rect width="28.0702" height="28.0702" fill="white" transform="translate(0.403503 0.526367)"></rect>
+                    </clipPath>
+                </defs>
+            </svg>
+        </button>
+    </div>
+
+    <div class="results" id="resultsContainer"></div>
+    <iframe id="videoFrame" src="" allowfullscreen></iframe>
+    <div id="imageGallery" class="container"></div>
+
+    <script>
+        const resultsContainer = document.getElementById('resultsContainer');
+        const videoFrame = document.getElementById('videoFrame');
+        const searchQueryInput = document.getElementById('searchQuery');
+        const searchButton = document.getElementById('searchButton');
+        const imageContainer = document.getElementById('imageGallery');
+
+        // Show the image gallery initially
+        imageContainer.style.display = 'flex';
+
+        // Hide the video frame initially
+        videoFrame.style.display = 'none';
+
+        // Add event listener for Enter key
+        searchQueryInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                search();
+            }
+        });
+
+        // Add event listener for search button
+        searchButton.addEventListener('click', search);
+
+        async function search() {
+            const query = searchQueryInput.value.trim();
+            resultsContainer.innerHTML = '';
+
+            // Hide the video frame when searching
+            videoFrame.style.display = 'none';
+
+            if (!query) {
+                imageContainer.style.display = 'flex'; // Show gallery if no query
+                return;
+            }
+
+            const apiKey = 'ea118e768e75a1fe3b53dc99c9e4de09'; // Replace with your TMDb API key
+            const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.results.length === 0) {
+                    resultsContainer.innerHTML = '<p>No results found.</p>';
+                    imageContainer.style.display = 'none'; // Hide gallery on search
+                    return;
+                }
+
+                imageContainer.style.display = 'none'; // Hide gallery when searching
+
+                data.results.forEach(result => {
+                    if (result.media_type !== 'documentary' && result.media_type !== 'special' && result.media_type !== 'mini-series') {
+                        const item = document.createElement('div');
+                        item.className = 'result-item';
+                        const imageUrl = result.poster_path ? `https://image.tmdb.org/t/p/w500${result.poster_path}` : null;
+                        if (imageUrl) {
+                            item.innerHTML = `
+                                <img src="${imageUrl}" alt="${result.title}" />
+                                <p>${result.title} (${new Date(result.release_date).getFullYear()})</p>
+                            `;
+                            // Add click event to show video for search results
+                            item.querySelector('img').onclick = () => embedVideo(result.id, 'movie');
+                            resultsContainer.appendChild(item);
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                resultsContainer.innerHTML = '<p>Error fetching data. Please try again later.</p>';
+            }
+        }
+
+        function embedVideo(videoId, mediaType) {
+            const embedUrl = `https://vidsrc.vip/embed/movie/${videoId}`;
+            videoFrame.src = embedUrl;
+            videoFrame.style.display = 'block'; // Show the video frame
+            resultsContainer.innerHTML = ''; // Clear search results when a video is embedded
+            // Keep the image gallery hidden
+        }
+
+        async function fetchLatestMovies() {
+            const apiKey = 'ea118e768e75a1fe3b53dc99c9e4de09'; // Replace with your TMDb API key
+            const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const latestMovies = data.results || [];
+
+                latestMovies.forEach(movie => {
+                    const imageUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null;
+                    if (imageUrl) {
+                        const img = document.createElement('img');
+                        img.src = imageUrl;
+                        img.alt = movie.title;
+                        // Add click event to show video for gallery images
+                        img.onclick = () => embedVideo(movie.id, 'movie');
+                        imageContainer.appendChild(img);
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching latest movies:', error);
+            }
+        }
+
+        fetchLatestMovies();
+    </script>
+
+</body>
+</html>
