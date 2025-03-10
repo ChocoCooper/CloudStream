@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cooper World</title>
+
+    <!-- Electroharmonix Font -->
+    <link href="https://fonts.cdnfonts.com/css/electroharmonix" rel="stylesheet"/>
+
+    <!-- Font Awesome for GitHub Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" media="print" onload="this.media='all'">
+
+    <style>
+        /* General Styles */
+        body {
+            background-color: rgb(40, 40, 40);
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 10px 20px 60px; /* Added padding at the bottom for footer */
+            position: relative; /* For footer positioning */
+        }
+
+        /* Title and Developer Credit Container */
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #2AF598;
+            padding: 10px 0;
+            width: 100%;
+            line-height: 1;
+        }
+
+        /* Developer Credit Styles */
+        .developer-credit {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #aaa;
+            text-align: right;
+            margin-top: -8px;
+        }
+
+        /* Desktop Size */
+        .developer-credit {
+            font-size: 4px;
+            width: 26%;
+        }
+
+        /* Mobile Size */
+        @media (max-width: 600px) {
+            .developer-credit {
+                font-size: 4px;
+                width: 75%;
+            }
+        }
+
+        /* Apply Electroharmonix Font to Name */
+        .developer-credit span {
+            font-family: 'Electroharmonix', 'Courier New', monospace, Arial, sans-serif;
+            font-size: inherit;
+        }
+
+        /* Footer Section */
+        footer {
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+        }
+
+        /* Clickable Footer Link */
+        .footer-link {
+            font-family: 'Electroharmonix', 'Courier New', monospace, Arial, sans-serif;
+            font-size: clamp(8px, 1vw, 12px);
+            color: #2AF598;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover Effect - Futuristic Glow */
+        .footer-link:hover {
+            color: #009EFD;
+            transform: scale(1.05);
+            box-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+            opacity: 0.9;
+        }
+
+        /* GitHub Icon */
+        .github-icon {
+            font-size: clamp(10px, 1.2vw, 14px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .footer-link {
+                font-size: clamp(8px, 1.2vw, 10px);
+                padding: 3px 6px;
+            }
+            .github-icon {
+                font-size: clamp(8px, 1.5vw, 12px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-link {
+                font-size: clamp(7px, 1.5vw, 9px);
+                padding: 2px 5px;
+            }
+            .github-icon {
+                font-size: clamp(7px, 1.8vw, 10px);
+            }
+        }
+
+        /* Rest of your CSS remains unchanged */
+        .searchBox {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: #2f3640;
+            border-radius: 50px;
+            position: relative;
+            height: 40px;
+            margin-bottom: 30px;
+        }
+
+        .searchButton {
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-2, linear-gradient(90deg, #2AF598 0%, #009EFD 100%));
+            border: 0;
+            display: inline-block;
+            transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        }
+
+        .searchButton:hover {
+            color: #fff;
+            background-color: #1A1A1A;
+            box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+            transform: translateY(-3px);
+        }
+
+        .searchButton:active {
+            box-shadow: none;
+            transform: translateY(0);
+        }
+
+        .searchInput {
+            border: none;
+            background: none;
+            outline: none;
+            color: white;
+            font-size: 15px;
+            padding: 8px 10px;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Video Container */
+        .video-container {
+            margin-top: 20px;
+            width: 90%;
+            max-width: 800px;
+            background: #1c1c1c;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+            position: relative;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+        }
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .close-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Results Container */
+        .results {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .result-item {
+            margin: 10px;
+            cursor: pointer;
+            text-align: center;
+            flex: 1 1 200px;
+            max-width: 200px;
+            background: #2f3640;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .result-item:hover {
+            transform: translateY(-5px);
+            box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+        }
+
+        .result-item img {
+            width: 100%;
+            height: auto;
+            border-bottom: 2px solid #009EFD;
+        }
+
+        .result-item p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #ecf0f1;
+        }
+
+        .result-item .release-date {
+            font-size: 12px;
+            color: #bdc3c7;
+        }
+
+        /* Mobile Styles (Two-in-a-row grid) */
+        @media (max-width: 600px) {
+            .result-item {
+                flex: 1 1 calc(50% - 20px);
+                max-width: calc(50% - 20px);
+            }
+        }
+
+        /* Image Gallery Styles */
+        .container img {
+            width: 16%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            transition: all ease-in-out 0.5s;
+        }
+
+        .container img:hover {
+            width: 25%;
+        }
+
+        @media (min-width: 901px) {
+            .container img {
+                width: 9%;
+            }
+            .container img:hover {
+                width: 13%;
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        /* Toggle Switch Styles */
+        .mydict {
+            display: block;
+        }
+
+        .mydict div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .mydict input[type="radio"] {
+            clip: rect(0 0 0 0);
+            clip-path: inset(100%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+        }
+
+        .mydict input[type="radio"]:checked + span {
+            box-shadow: 0 0 0 0.0625em #2AF598;
+            background-color: #1c1c1c;
+            z-index: 1;
+            color: #2AF598;
+        }
+
+        label span {
+            display: block;
+            cursor: pointer;
+            background-color: #2f3640;
+            padding: 0.25em 0.5em;
+            position: relative;
+            margin-left: 0.0625em;
+            box-shadow: 0 0 0 0.0625em #4a5568;
+            letter-spacing: 0.05em;
+            color: #a0aec0;
+            text-align: center;
+            transition: background-color 0.5s ease;
+            font-size: 14px;
+        }
+
+        label:first-child span {
+            border-radius: 0.375em 0 0 0.375em;
+        }
+
+        label:last-child span {
+            border-radius: 0 0.375em 0.375em 0;
+        }
+
+        /* Season and Episode Selector Styles */
+        .selector-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        select {
+            padding: 6px 24px 6px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e0e0e0'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 12px;
+            width: 45%;
+            min-width: 100px;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        select:hover {
+            border-color: #666;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #888;
+        }
+
+        /* Custom colors for select dropdowns */
+        #season-select,
+        #episode-select {
+            border-color: #2AF598;
+            background-color: #1e1e1e;
+            color: #2AF598;
+        }
+    </style>
+</head>
+<body>
+    <!-- Title and Developer Credit Container -->
+    <div class="title-container">
+        <h1>Cooper World</h1>
+        <p class="developer-credit">Developed by <span>Choco Cooper</span></p>
+    </div>
+
+    <!-- Search Box -->
+    <div class="searchBox">
+        <input class="searchInput" type="text" id="searchQuery" placeholder="Search for movies..." />
+        <button class="searchButton" id="searchButton">
+            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+                <g clip-path="url(#clip0_2_17)">
+                    <g filter="url(#filter0_d_2_17)">
+                        <path d="M23.7953 23.9182L19.0585 19.1814M19.0585 19.1814C19.8188 18.4211 20.4219 17.5185 20.8333 16.5251C21.2448 15.5318 21.4566 14.4671 21.4566 13.3919C21.4566 12.3167 21.2448 11.252 20.8333 10.2587C20.4219 9.2653 19.8188 8.36271 19.0585 7.60242C18.2982 6.84214 17.3956 6.23905 16.4022 5.82759C15.4089 5.41612 14.3442 5.20435 13.269 5.20435C12.1938 5.20435 11.1291 5.41612 10.1358 5.82759C9.1424 6.23905 8.23981 6.84214 7.47953 7.60242C5.94407 9.13789 5.08145 11.2204 5.08145 13.3919C5.08145 15.5634 5.94407 17.6459 7.47953 19.1814C9.01499 20.7168 11.0975 21.5794 13.269 21.5794C15.4405 21.5794 17.523 20.7168 19.0585 19.1814Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" shape-rendering="crispEdges"></path>
+                    </g>
+                </g>
+                <defs>
+                    <filter id="filter0_d_2_17" x="-0.418549" y="3.70435" width="29.7139" height="29.7139" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+                        <feOffset dy="4"></feOffset>
+                        <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                        <feComposite in2="hardAlpha" operator="out"></feComposite>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_17"></feBlend>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_17" result="shape"></feBlend>
+                    </filter>
+                    <clipPath id="clip0_2_17">
+                        <rect width="28.0702" height="28.0702" fill="white" transform="translate(0.403503 0.526367)"></rect>
+                    </clipPath>
+                </defs>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Toggle Switch -->
+    <div class="mydict">
+        <div>
+            <label>
+                <input type="radio" name="radio" checked="" id="moviesToggle" />
+                <span>Movies</span>
+            </label>
+            <label>
+                <input type="radio" name="radio" id="seriesToggle" />
+                <span>Series</span>
+            </label>
+            <label>
+                <input type="radio" name="radio" id="animeToggle" />
+                <span>Anime</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Video Container -->
+    <div class="video-container" id="videoContainer">
+        <div class="video-wrapper">
+            <iframe id="videoFrame" src="" allowfullscreen></iframe>
+        </div>
+        <button class="close-button" id="closeButton">×</button>
+    </div>
+
+    <!-- Season and Episode Selector -->
+    <div class="selector-container" id="selectorContainer" style="display: none;">
+        <select id="season-select">
+            <option value="">Select Season</option>
+        </select>
+        <select id="episode-select">
+            <option value="">Select Episode</option>
+        </select>
+    </div>
+
+    <!-- Results Container -->
+    <div class="results" id="resultsContainer"></div>
+
+    <!-- Image Gallery -->
+    <div id="imageGallery" class="container"></div>
+
+    <!-- Footer with Stylish Clickable Link -->
+    <footer>
+        <a href="https://github.com/ChocoCooper" class="footer-link" target="_blank" aria-label="Visit Choco Cooper's GitHub Profile">
+            © Choco Cooper
+            <i class="fa-brands fa-github github-icon" aria-hidden="true"></i>
+        </a>
+    </footer>
+
+    <script>
+        const resultsContainer = document.getElementById('resultsContainer');
+        const videoFrame = document.getElementById('videoFrame');
+        const videoContainer = document.getElementById('videoContainer');
+        const searchQueryInput = document.getElementById('searchQuery');
+        const searchButton = document.getElementById('searchButton');
+        const imageContainer = document.getElementById('imageGallery');
+        const closeButton = document.getElementById('closeButton');
+        const moviesToggle = document.getElementById('moviesToggle');
+        const seriesToggle = document.getElementById('seriesToggle');
+        const animeToggle = document.getElementById('animeToggle');
+        const selectorContainer = document.getElementById('selectorContainer');
+        const seasonSelect = document.getElementById('season-select');
+        const episodeSelect = document.getElementById('episode-select');
+        const toggleContainer = document.querySelector('.mydict');
+
+        let currentMediaType = 'movie'; // Default to movies
+        let currentMediaId = null;
+
+        // Show the image gallery initially
+        imageContainer.style.display = 'flex';
+
+        // Hide the video frame initially
+        videoContainer.style.display = 'none';
+
+        // Hide toggle container when searching
+        function hideToggle() {
+            toggleContainer.style.display = 'none';
+        }
+
+        // Show toggle container when displaying the image gallery
+        function showToggle() {
+            toggleContainer.style.display = 'block';
+        }
+
+        // Hide selectors when Movies toggle is selected
+        function hideSelectors() {
+            selectorContainer.style.display = 'none';
+        }
+
+        // Show selectors when Series or Anime toggle is selected
+        function showSelectors() {
+            selectorContainer.style.display = 'flex';
+        }
+
+        // Clear the search bar text
+        function clearSearchText() {
+            searchQueryInput.value = '';
+        }
+
+        // Add event listener for Enter key
+        searchQueryInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                hideToggle(); // Hide toggle when searching
+                search();
+            }
+        });
+
+        // Add event listener for search button
+        searchButton.addEventListener('click', () => {
+            hideToggle(); // Hide toggle when searching
+            search();
+        });
+
+        // Add event listener for close button
+        closeButton.addEventListener('click', () => {
+            videoContainer.style.display = 'none';
+            videoFrame.src = ''; // Stop the video
+            hideSelectors(); // Hide selectors
+        });
+
+        // Add event listeners for toggle switches
+        moviesToggle.addEventListener('change', () => {
+            if (moviesToggle.checked) {
+                currentMediaType = 'movie';
+                hideSelectors(); // Hide selectors for movies
+                if (searchQueryInput.value.trim()) {
+                    hideToggle(); // Hide toggle when searching
+                    search();
+                } else {
+                    showToggle(); // Show toggle when displaying gallery
+                    fetchTrendingMovies();
+                }
+            }
+        });
+
+        seriesToggle.addEventListener('change', () => {
+            if (seriesToggle.checked) {
+                currentMediaType = 'tv';
+                if (searchQueryInput.value.trim()) {
+                    hideToggle(); // Hide toggle when searching
+                    search();
+                } else {
+                    showToggle(); // Show toggle when displaying gallery
+                    fetchTrendingSeries();
+                }
+            }
+        });
+
+        animeToggle.addEventListener('change', () => {
+            if (animeToggle.checked) {
+                currentMediaType = 'tv'; // Anime is also under 'tv' in TMDb
+                if (searchQueryInput.value.trim()) {
+                    hideToggle(); // Hide toggle when searching
+                    search();
+                } else {
+                    showToggle(); // Show toggle when displaying gallery
+                    fetchTrendingAnime();
+                }
+            }
+        });
+
+        // Add event listener for season selection
+        seasonSelect.addEventListener('change', async () => {
+            const seasonNumber = seasonSelect.value;
+            if (seasonNumber && currentMediaId) {
+                await fetchEpisodes(currentMediaId, seasonNumber);
+            }
+        });
+
+        // Add event listener for episode selection
+        episodeSelect.addEventListener('change', () => {
+            const episodeNumber = episodeSelect.value;
+            if (episodeNumber && currentMediaId) {
+                const seasonNumber = seasonSelect.value;
+                embedVideo(currentMediaId, currentMediaType, seasonNumber, episodeNumber);
+            }
+        });
+
+        async function search() {
+            const query = searchQueryInput.value.trim();
+            resultsContainer.innerHTML = '';
+
+            // Hide the video frame when searching
+            videoContainer.style.display = 'none';
+            hideSelectors(); // Hide selectors during search
+
+            if (!query) {
+                imageContainer.style.display = 'flex'; // Show gallery if no query
+                showToggle(); // Show toggle when displaying gallery
+                return;
+            }
+
+            const apiKey = 'ea118e768e75a1fe3b53dc99c9e4de09'; // Replace with your TMDb API key
+
+            // Search for movies, series, and anime
+            const movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
+            const seriesUrl = `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
+            const animeUrl = `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&query=${encodeURIComponent(query)}&with_genres=16`;
+
+            try {
+                // Fetch results for movies, series, and anime
+                const [movieResponse, seriesResponse, animeResponse] = await Promise.all([
+                    fetch(movieUrl),
+                    fetch(seriesUrl),
+                    fetch(animeUrl),
+                ]);
+
+                const movieData = await movieResponse.json();
+                const seriesData = await seriesResponse.json();
+                const animeData = await animeResponse.json();
+
+                // Combine results from movies, series, and anime
+                const combinedResults = [
+                    ...movieData.results.map(result => ({ ...result, mediaType: 'movie' })),
+                    ...seriesData.results.map(result => ({ ...result, mediaType: 'tv' })),
+                    ...animeData.results.map(result => ({ ...result, mediaType: 'tv' })),
+                ];
+
+                // Filter out results without titles or names
+                const filteredResults = combinedResults.filter(result => result.title || result.name);
+
+                if (filteredResults.length === 0) {
+                    resultsContainer.innerHTML = '<p>No results found.</p>';
+                    imageContainer.style.display = 'none'; // Hide gallery on search
+                    return;
+                }
+
+                imageContainer.style.display = 'none'; // Hide gallery when searching
+
+                filteredResults.forEach(result => {
+                    const item = document.createElement('div');
+                    item.className = 'result-item';
+                    const imageUrl = result.poster_path ? `https://image.tmdb.org/t/p/w500${result.poster_path}` : null;
+                    if (imageUrl) {
+                        item.innerHTML = `
+                            <img src="${imageUrl}" alt="${result.title || result.name}" />
+                            <p>${result.title || result.name}</p>
+                            <p class="release-date">(${new Date(result.release_date || result.first_air_date).getFullYear()})</p>
+                        `;
+                        // Add click event to show video for search results
+                        item.querySelector('img').onclick = () => {
+                            clearSearchText(); // Clear the search bar text
+                            currentMediaId = result.id;
+                            currentMediaType = result.mediaType;
+                            if (currentMediaType === 'movie') {
+                                embedVideo(result.id, 'movie');
+                                hideSelectors(); // Hide selectors for movies
+                            } else if (currentMediaType === 'tv') {
+                                // Show a blank black screen for series/anime
+                                videoFrame.src = ''; // Clear the iframe source
+                                videoContainer.style.display = 'block'; // Show the video container
+                                fetchSeasons(result.id);
+                                showSelectors(); // Show selectors for series/anime
+                            }
+                            resultsContainer.innerHTML = ''; // Clear search results
+                            // Scroll to the video container
+                            videoContainer.scrollIntoView({ behavior: 'smooth' });
+                        };
+                        resultsContainer.appendChild(item);
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                resultsContainer.innerHTML = '<p>Error fetching data. Please try again later.</p>';
+            }
+        }
+
+        function embedVideo(mediaId, mediaType, seasonNumber = null, episodeNumber = null) {
+            let embedUrl;
+            if (mediaType === 'movie') {
+                embedUrl = `https://vidsrc.vip/embed/${mediaType}/${mediaId}`;
+                videoFrame.src = embedUrl;
+                videoContainer.style.display = 'block'; // Show the video frame
+            } else if (mediaType === 'tv' && seasonNumber && episodeNumber) {
+                embedUrl = `https://vidsrc.vip/embed/${mediaType}/${mediaId}/${seasonNumber}/${episodeNumber}`;
+                videoFrame.src = embedUrl;
+                videoContainer.style.display = 'block'; // Show the video frame
+            } else {
+                videoFrame.src = ''; // Clear the iframe source
+                videoContainer.style.display = 'block'; // Show the video container (blank black screen)
+            }
+            resultsContainer.innerHTML = ''; // Clear search results when a video is embedded
+        }
+
+        async function fetchSeasons(mediaId) {
+            const apiKey = 'ea118e768e75a1fe3b53dc99c9e4de09'; // Replace with your TMDb API key
+            const url = `https://api.themoviedb.org/3/tv/${mediaId}?api_key=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const seasons = data.seasons || [];
+
+                // Populate season selector, omitting Season 0
+                seasonSelect.innerHTML = '<option value="">Select Season</option>';
+                seasons.forEach(season => {
+                    if (season.season_number > 0) { // Ignore Season 0
+                        const option = document.createElement('option');
+                        option.value = season.season_number;
+                        option.textContent = `Season ${season.season_number}`;
+                        seasonSelect.appendChild(option);
+                    }
+                });
+
+                // Show the selector container
+                selectorContainer.style.display = 'flex';
+            } catch (error) {
+                console.error('Error fetching seasons:', error);
+            }
+        }
+
+        async function fetchEpisodes(mediaId, seasonNumber) {
+            const apiKey = 'ea118e768e75a1fe3b53dc99c9e4de09'; // Replace with your TMDb API key
+            const url = `https://api.themoviedb.org/3/tv/${mediaId}/season/${seasonNumber}?api_key=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const episodes = data.episodes || [];
+
+                // Populate episode selector, simplifying episode names
+                episodeSelect.innerHTML = '<option value="">Select Episode</option>';
+                episodes.forEach(episode => {
+                    const option = document.createElement('option');
+                    option.value = episode.episode_number;
+                    option.textContent = `Episode ${episode.episode_number}`; // Simplified to just "Episode X"
+                    episodeSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching episodes:', error);
+            }
+        }
+
+        async function fetchTrendingMovies() {
+            const apiKey = 'ea118e768e75a1fe3b53dc99c9e4de09'; // Replace with your TMDb API key
+            const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const trendingMovies = data.results || [];
+
+                imageContainer.innerHTML = ''; // Clear previous images
+                trendingMovies.forEach(movie => {
+                    const imageUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null;
+                    if (imageUrl) {
+                        const img = document.createElement('img');
+                        img.src = imageUrl;
+                        img.alt = movie.title;
+                        // Add click event to show video for gallery images
+                        img.onclick = () => {
+                            currentMediaId = movie.id;
+                            embedVideo(movie.id, 'movie');
+                            hideSelectors(); // Hide selectors for movies
+                            // Scroll to the video container
+                            videoContainer.scrollIntoView({ behavior: 'smooth' });
+                        };
+                        imageContainer.appendChild(img);
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching trending movies:', error);
+            }
+        }
+
+        async function fetchTrendingSeries() {
+            const apiKey = 'ea118e768e75a1fe3b53dc99c9e4de09'; // Replace with your TMDb API key
+            const url = `https://api.themoviedb.org/3/trending/tv/day?api_key=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const trendingSeries = data.results || [];
+
+                imageContainer.innerHTML = ''; // Clear previous images
+                trendingSeries.forEach(series => {
+                    const imageUrl = series.poster_path ? `https://image.tmdb.org/t/p/w500${series.poster_path}` : null;
+                    if (imageUrl) {
+                        const img = document.createElement('img');
+                        img.src = imageUrl;
+                        img.alt = series.name;
+                        // Add click event to show video for gallery images
+                        img.onclick = () => {
+                            currentMediaId = series.id;
+                            videoFrame.src = ''; // Clear the iframe source
+                            videoContainer.style.display = 'block'; // Show the video container
+                            fetchSeasons(series.id);
+                            showSelectors(); // Show selectors for series
+                            // Scroll to the video container
+                            videoContainer.scrollIntoView({ behavior: 'smooth' });
+                        };
+                        imageContainer.appendChild(img);
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching trending series:', error);
+            }
+        }
+
+        async function fetchTrendingAnime() {
+            const apiKey = 'ea118e768e75a1fe3b53dc99c9e4de09'; // Replace with your TMDb API key
+            const url = `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_genres=16`; // Genre ID 16 for Anime
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const trendingAnime = data.results || [];
+
+                imageContainer.innerHTML = ''; // Clear previous images
+                trendingAnime.forEach(anime => {
+                    const imageUrl = anime.poster_path ? `https://image.tmdb.org/t/p/w500${anime.poster_path}` : null;
+                    if (imageUrl) {
+                        const img = document.createElement('img');
+                        img.src = imageUrl;
+                        img.alt = anime.name;
+                        // Add click event to show video for gallery images
+                        img.onclick = () => {
+                            currentMediaId = anime.id;
+                            videoFrame.src = ''; // Clear the iframe source
+                            videoContainer.style.display = 'block'; // Show the video container
+                            fetchSeasons(anime.id);
+                            showSelectors(); // Show selectors for anime
+                            // Scroll to the video container
+                            videoContainer.scrollIntoView({ behavior: 'smooth' });
+                        };
+                        imageContainer.appendChild(img);
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching trending anime:', error);
+            }
+        }
+
+        // Fetch trending movies by default
+        fetchTrendingMovies();
+    </script>
+</body>
+</html>
