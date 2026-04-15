@@ -1,13 +1,13 @@
 #EXTM3U
 
-#EXTINF:-1 tvg-id="test" tvg-logo="https://example.com/skynews.png" group-title="News", Test
-https://yt.s16.workers.dev/?c=UCmyKnNRH0wH-r8I-ceP-dsg
+#EXTINF:-1 tvg-id="test1" tvg-logo="https://example.com/skynews.png" group-title="News", Test 1
+https://yt.s16.workers.dev/?c=UCmyKnNRH0wH-r8I-ceP-dsg&ext=.m3u8
 
-#EXTINF:-1 tvg-id="test" tvg-logo="https://example.com/skynews.png" group-title="News", Test
-https://yt.s16.workers.dev/?c=UC-JFyL0zDFOsPMpuWu39rPA
+#EXTINF:-1 tvg-id="test2" tvg-logo="https://example.com/skynews.png" group-title="News", Test 2
+https://yt.s16.workers.dev/?c=UC-JFyL0zDFOsPMpuWu39rPA&ext=.m3u8
 
-#EXTINF:-1 tvg-id="test" tvg-logo="https://example.com/skynews.png" group-title="News", Test
-https://yt.s16.workers.dev/?c=UC8Z-VjXBtDJTvq6aqkIskPg
+#EXTINF:-1 tvg-id="test3" tvg-logo="https://example.com/skynews.png" group-title="News", Test 3
+https://yt.s16.workers.dev/?c=UC8Z-VjXBtDJTvq6aqkIskPg&ext=.m3u8
 
-#EXTINF:-1 tvg-id="test" tvg-logo="https://example.com/skynews.png" group-title="News", Test
-https://yt.s16.workers.dev/?v=Z3jKMRDdUsI
+#EXTINF:-1 tvg-id="test4" tvg-logo="https://example.com/skynews.png" group-title="News", Test 4
+https://yt.s16.workers.dev/?v=Z3jKMRDdUsI&ext=.m3u8
